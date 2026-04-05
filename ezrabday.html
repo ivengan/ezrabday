@@ -247,26 +247,56 @@
             color: white;
         }
 
-        .submit-btn {
+        .btn-yes {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
             border-radius: 9999px;
-            padding: 1.1rem 3rem;
-            font-size: 1.3rem;
+            padding: 1rem;
+            font-size: 1.2rem;
             font-weight: 900;
             cursor: pointer;
-            align-self: center; /* Center the button */
-            width: auto;
-            min-width: 180px;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4), 0 0 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
             transition: transform 0.2s, box-shadow 0.2s;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            width: 100%;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.6), 0 0 25px rgba(99, 102, 241, 0.5);
+        .btn-no {
+            background: rgba(244, 63, 94, 0.2);
+            color: white;
+            border: 2px solid rgba(244, 63, 94, 0.4);
+            border-radius: 9999px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn-yes:hover, .btn-no:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-no:hover { background: rgba(244, 63, 94, 0.3); }
+
+        .calendar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-top: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 999px;
+            transition: all 0.3s;
         }
 
         .calendar-btn {
@@ -386,23 +416,18 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                    <label class="radio-option" style="cursor: pointer;">
-                        <input type="radio" name="attendance" value="Yes" checked style="display: none;">
-                        <span class="radio-label">YES! 🚀</span>
-                    </label>
-                    <label class="radio-option" style="cursor: pointer;">
-                        <input type="radio" name="attendance" value="No" style="display: none;">
-                        <span class="radio-label" style="background: rgba(244, 63, 94, 0.3); border-color: rgba(244, 63, 94, 0.5);">SORRY, I CAN'T 😢</span>
-                    </label>
-                </div>
+                <input type="hidden" name="attendance" id="attendance-value" value="Yes">
 
-                <button type="submit" class="submit-btn" id="submit-btn">SEND!</button>
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+                    <button type="button" class="btn-yes" onclick="submitRSVP('Yes')" id="btn-yes">YES! 🚀</button>
+                    <button type="button" class="btn-no" onclick="submitRSVP('No')" id="btn-no">SORRY, I CAN'T 😢</button>
+                </div>
+                
                 <p style="text-align: center; color: #cbd5e1; font-size: 0.75rem; font-weight: 800;">
                     Please RSVP by April 9
                 </p>
-                <div id="reminder-link-container" style="display: none; text-align: center; margin-top: 1rem;">
-                    <a href="reminder.html" class="calendar-btn" style="background: rgba(99, 102, 241, 0.2); border-color: var(--primary);">🎁 VIEW PARTY REMINDERS</a>
+                <div id="reminder-link-container" style="display: none; text-align: center; margin-top: 0.5rem;">
+                    <a href="reminder.html" class="calendar-btn">🎁 VIEW PARTY REMINDERS</a>
                 </div>
             </form>
         </div>
@@ -470,20 +495,42 @@
         function openMapPicker() { document.getElementById('mapModal').style.display = 'flex'; }
         function closeMapPicker() { document.getElementById('mapModal').style.display = 'none'; }
 
-        // RSVP Form
-        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-            const attendance = document.querySelector('input[name="attendance"]:checked').value;
-            const btn = document.getElementById('submit-btn');
+        // New RSVP Submission Logic
+        function submitRSVP(response) {
+            const form = document.getElementById('rsvp-form');
+            const nameInput = document.getElementById('name');
+            const attendanceInput = document.getElementById('attendance-value');
             
-            if (attendance === 'Yes') {
-                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
-                btn.innerText = 'GREAT! SEE YOU ON APRIL 18! 🎈';
-                document.getElementById('reminder-link-container').style.display = 'block';
-            } else {
-                btn.innerText = 'SENDING...';
+            // Check validation
+            if (!nameInput.value.trim()) {
+                nameInput.style.borderColor = 'var(--accent)';
+                alert("Please insert your name first! 🙏");
+                return;
             }
-            btn.disabled = true;
-        });
+
+            // Set the outcome
+            attendanceInput.value = response;
+
+            if (response === 'No') {
+                alert("Oops, we hope to see you on next event!");
+                form.submit(); // Just submit, no confetti
+                return;
+            }
+
+            // "Yes" Response Path
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
+            document.getElementById('btn-yes').innerText = 'GREAT! SEE YOU SOON! 🎈';
+            document.getElementById('btn-no').style.display = 'none';
+            document.getElementById('reminder-link-container').style.display = 'block';
+            
+            // Submit form to Formspree
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).catch(err => console.log(err));
+        }
     </script>
 </body>
 </html>
