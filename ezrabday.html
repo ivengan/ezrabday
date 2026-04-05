@@ -382,9 +382,6 @@
                 <p style="text-align: center; color: #cbd5e1; font-size: 0.75rem; font-weight: 800;">
                     Please RSVP by April 9
                 </p>
-                <div id="reminder-link-container" style="display: none; text-align: center; margin-top: 0.5rem;">
-                    <a href="reminder.html" class="calendar-btn">🎁 VIEW PARTY REMINDERS</a>
-                </div>
             </form>
         </div>
 
@@ -459,9 +456,11 @@
             confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
             document.getElementById('btn-yes').innerText = 'GREAT! SEE YOU SOON! 🎈';
             document.getElementById('btn-no').style.display = 'none';
-            document.getElementById('reminder-link-container').style.display = 'block';
             
-            // fetch submission removed as requested
+            // Redirect to reminders after a brief moment to show success
+            setTimeout(() => {
+                window.location.href = 'reminder.html';
+            }, 1800);
         }
     </script>
 </body>
