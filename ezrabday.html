@@ -16,9 +16,11 @@
             --secondary: #a855f7;
             --accent: #f43f5e;
             --bg: #0f172a;
-            --surface: #1e293b;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+            --surface: rgba(15, 23, 42, 0.85); /* Darker surface for better contrast */
+            --text-main: #ffffff;
+            --text-dim: #cbd5e1;
+            --cake-base: #fef3c7;
+            --cake-frosting: #fce7f3;
         }
 
         * {
@@ -38,46 +40,110 @@
             justify-content: center;
             overflow: hidden;
             padding: 1rem;
+            position: relative;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out;
+        /* Cake Background */
+        .cake-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .cake {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            background: var(--cake-base);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 10px 0 #fde68a, inset 0 -10px 0 rgba(0,0,0,0.1);
+        }
+
+        .frosting {
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            width: 260px;
+            height: 40px;
+            background: var(--cake-frosting);
+            border-radius: 20px;
+            box-shadow: 0 5px 0 #fbcfe8;
+        }
+
+        /* Candles */
+        .candles {
+            position: absolute;
+            top: -40px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 30px;
+        }
+
+        .candle {
+            width: 12px;
+            height: 45px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .flame {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 18px;
+            background: #ffa500;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ff4500, 0 0 5px #ffd700;
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); opacity: 1; }
+        }
+
+        /* Multi-colored candles */
+        .c1 { background: #ff595e; }
+        .c2 { background: #ffca3a; }
+        .c3 { background: #8ac926; }
+        .c4 { background: #1982c4; }
+        .c5 { background: #6a4c93; }
+        .c6 { background: #f15bb5; }
+
+        /* Card Section */
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2.5rem;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            z-index: 1;
+            position: relative;
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .hero h1 {
             font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.2rem;
-            letter-spacing: -0.05em;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-dim);
-            font-weight: 300;
-        }
-
-        /* Card Section */
-        .card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 2.5rem;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            text-align: center;
         }
 
         .info-grid {
@@ -85,31 +151,30 @@
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 1.5rem;
         }
 
         .info-item h3 {
             font-size: 0.75rem;
             text-transform: uppercase;
-            color: var(--primary);
-            letter-spacing: 0.1em;
+            color: #818cf8;
+            font-weight: 800;
             margin-bottom: 0.25rem;
         }
 
         .info-item p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
-            line-height: 1.2;
+            color: #ffffff;
         }
 
         .location-link {
-            color: var(--secondary);
+            color: #a5b4fc;
             text-decoration: underline;
             cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .location-link:hover {
-            color: white;
+            font-weight: 800;
         }
 
         /* RSVP Form */
@@ -117,69 +182,35 @@
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
             text-align: center;
-        }
-
-        .rsvp-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
+            color: #ffffff;
+            font-weight: 800;
         }
 
         .input-group label {
             font-size: 0.8rem;
             color: var(--text-dim);
+            font-weight: 600;
         }
 
-        input[type="text"], input[type="number"], textarea {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        input[type="text"], input[type="number"] {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 0.75rem;
-            padding: 0.6rem;
+            padding: 0.75rem;
             color: white;
-            font-size: 0.9rem;
-            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
         }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 0.75rem;
-        }
-
-        .radio-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-        }
-
-        .radio-option input { display: none; }
 
         .radio-label {
             display: block;
-            padding: 0.6rem;
+            padding: 0.75rem;
             text-align: center;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 0.75rem;
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-        }
-
-        .radio-option input:checked + .radio-label {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .radio-option.no input:checked + .radio-label {
-            background: var(--accent);
-            border-color: var(--accent);
+            font-weight: 800;
+            font-size: 0.85rem;
         }
 
         .submit-btn {
@@ -187,18 +218,18 @@
             color: white;
             border: none;
             border-radius: 9999px;
-            padding: 0.85rem;
-            font-size: 1.1rem;
-            font-weight: 800;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 900;
             cursor: pointer;
-            margin-top: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         /* Map Modal */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             align-items: center;
             justify-content: center;
@@ -206,61 +237,37 @@
         }
 
         .modal {
-            background: var(--surface);
+            background: #1e293b;
             padding: 2rem;
             border-radius: 2rem;
             text-align: center;
             width: 90%;
             max-width: 320px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-        }
-
-        .modal h3 { margin-bottom: 1.5rem; font-size: 1.2rem; }
-
-        .map-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .map-btn {
-            padding: 1rem;
-            border-radius: 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-            transition: background 0.3s;
-        }
-
-        .btn-google { background: #4285F4; }
-        .btn-waze { background: #33CCFF; }
-        .btn-close { background: transparent; border: 1px solid var(--text-dim); margin-top: 0.5rem; }
-
-        /* Deadline Banner */
-        #deadline-banner {
-            display: none;
-            background: rgba(244, 63, 94, 0.2);
-            border: 2px dashed var(--accent);
-            padding: 1.5rem;
-            border-radius: 2rem;
-            text-align: center;
         }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        @media (max-height: 700px) {
-            .hero h1 { font-size: 1.8rem; }
-            .card { padding: 1.25rem; gap: 0.75rem; }
-            h2 { font-size: 1.2rem; }
-        }
     </style>
 </head>
 <body>
 
+    <!-- Animated Cake Background -->
+    <div class="cake-container">
+        <div class="candles">
+            <div class="candle c1"><div class="flame"></div></div>
+            <div class="candle c2"><div class="flame"></div></div>
+            <div class="candle c3"><div class="flame"></div></div>
+            <div class="candle c4"><div class="flame"></div></div>
+            <div class="candle c5"><div class="flame"></div></div>
+            <div class="candle c6"><div class="flame"></div></div>
+        </div>
+        <div class="cake">
+            <div class="frosting"></div>
+        </div>
+    </div>
+
     <div class="hero">
         <h1>EZRA'S BIRTHDAY</h1>
-        <p>A Galactic Celebration!</p>
     </div>
 
     <div class="card" id="invitation-card">
@@ -273,81 +280,90 @@
             <div class="info-item">
                 <h3>Where</h3>
                 <p class="location-link" onclick="openMapPicker()">Ezra's home sweet home</p>
-                <p style="font-size: 0.7rem; color: var(--text-dim)">(Tap to navigate)</p>
+                <p style="font-size: 0.7rem; color: #94a3b8; font-weight: 600;">(Tap to navigate)</p>
             </div>
         </div>
 
         <div id="rsvp-container">
             <h2>Will you join us?</h2>
             <form action="https://formspree.io/f/ivengan123@gmail.com" method="POST" class="rsvp-form" id="rsvp-form">
-                <div class="form-row">
-                    <div class="input-group">
+                <div style="display: grid; grid-template-columns: 2.5fr 1fr; gap: 0.75rem;">
+                    <div class="input-group" style="display: flex; flex-direction: column; gap: 0.25rem;">
                         <label for="name">Guest Name</label>
                         <input type="text" id="name" name="name" placeholder="Name" required>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="display: flex; flex-direction: column; gap: 0.25rem;">
                         <label for="parents">Parent(s)</label>
                         <input type="number" id="parents" name="parents" value="1" min="0" max="2" required>
                     </div>
                 </div>
 
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="attendance" value="Yes" checked>
-                        <span class="radio-label">YES! I'M IN! 🚀</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <label class="radio-option" style="cursor: pointer;">
+                        <input type="radio" name="attendance" value="Yes" checked style="display: none;">
+                        <span class="radio-label">YES! 🚀</span>
                     </label>
-                    <label class="radio-option no">
-                        <input type="radio" name="attendance" value="No">
-                        <span class="radio-label">SORRY, CAN'T 😢</span>
+                    <label class="radio-option" style="cursor: pointer;">
+                        <input type="radio" name="attendance" value="No" style="display: none;">
+                        <span class="radio-label" style="background: rgba(244, 63, 94, 0.2); border-color: rgba(244, 63, 94, 0.4);">NO 😢</span>
                     </label>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submit-btn">SEND!</button>
-                <p style="text-align: center; color: var(--text-dim); font-size: 0.7rem;">
-                    RSVP by April 12
+                <p style="text-align: center; color: #94a3b8; font-size: 0.75rem; font-weight: 700; margin-top: 0.5rem;">
+                    Please RSVP by April 12
                 </p>
             </form>
         </div>
 
-        <div id="deadline-banner">
-            <h3>RSVP CLOSED</h3>
-            <p>We hope to see you next time!</p>
+        <div id="deadline-banner" style="display: none; text-align: center; padding: 1rem;">
+            <h3 style="color: var(--accent); font-size: 1.2rem;">RSVP CLOSED</h3>
+            <p>See you next time!</p>
         </div>
     </div>
 
     <!-- Map Modal -->
     <div class="modal-overlay" id="mapModal">
         <div class="modal">
-            <h3>Navigate with...</h3>
-            <div class="map-options">
-                <a href="https://www.google.com/maps/search/?api=1&query=2.2713214237008,102.53505347543722" target="_blank" class="map-btn btn-google">Google Maps</a>
-                <a href="https://waze.com/ul?ll=2.2713214237008,102.53505347543722&navigate=yes" target="_blank" class="map-btn btn-waze">Waze</a>
-                <button class="map-btn btn-close" onclick="closeMapPicker()">Cancel</button>
+            <h3 style="margin-bottom: 1.5rem;">Navigate with...</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <a href="https://www.google.com/maps/search/?api=1&query=2.2713214237008,102.53505347543722" target="_blank" style="background: #4285F4; padding: 1rem; border-radius: 1rem; color: white; text-decoration: none; font-weight: bold;">Google Maps</a>
+                <a href="https://waze.com/ul?ll=2.2713214237008,102.53505347543722&navigate=yes" target="_blank" style="background: #33CCFF; padding: 1rem; border-radius: 1rem; color: white; text-decoration: none; font-weight: bold;">Waze</a>
+                <button onclick="closeMapPicker()" style="background: transparent; border: 1px solid #94a3b8; color: #94a3b8; padding: 0.75rem; border-radius: 1rem; cursor: pointer;">Cancel</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Deadline checking
+        // Trigger Confetti on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93']
+            });
+        });
+
+        // Deadline check
         const deadlineDate = new Date('2026-04-13T00:00:00');
         if (new Date() > deadlineDate) {
             document.getElementById('rsvp-container').style.display = 'none';
             document.getElementById('deadline-banner').style.display = 'block';
         }
 
-        // Map Modal controls
+        // Map picker
         function openMapPicker() { document.getElementById('mapModal').style.display = 'flex'; }
         function closeMapPicker() { document.getElementById('mapModal').style.display = 'none'; }
 
-        // RSVP logic
+        // RSVP celebration
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
             if (attendance === 'Yes') {
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
             }
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = 'SENDING...';
-            btn.disabled = true;
+            document.getElementById('submit-btn').innerText = 'SENDING...';
+            document.getElementById('submit-btn').disabled = true;
         });
     </script>
 </body>
