@@ -456,6 +456,19 @@
             confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
             document.getElementById('btn-yes').innerText = 'GREAT! SEE YOU SOON! 🎈';
             document.getElementById('btn-no').style.display = 'none';
+
+            // Submit to Google Sheets (Privacy protected)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxI0kZ5nZ7H_flKGL5-VpsVBuAZS4TbQbbwDjlYW6b5dTiNNa6td9F2ZjXgcdpY7sxagw/exec';
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', // Simple request to avoid CORS issues
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    name: nameInput.value,
+                    parents: document.getElementById('parents').value,
+                    attendance: response
+                })
+            }).catch(err => console.log('Sheet Error:', err));
             
             // Redirect to reminders after a brief moment to show success
             setTimeout(() => {
