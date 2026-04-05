@@ -374,7 +374,7 @@
 
                 <div style="display: flex; flex-direction: column; gap: 4px; margin-top: -0.25rem;">
                     <label for="contact" style="font-size: 0.75rem; font-weight: 800; color: #a5b4fc;">📞 Person to contact (Phone)</label>
-                    <input type="tel" id="contact" name="contact" placeholder="012-3456789">
+                    <input type="tel" id="contact" name="contact" placeholder="012-3456789" required>
                 </div>
 
                 <input type="hidden" name="attendance" id="attendance-value" value="Yes">
@@ -451,9 +451,11 @@
             }
             
             // Check validation ONLY for "Yes" responses
-            if (!nameInput.value.trim()) {
-                nameInput.style.borderColor = 'var(--accent)';
-                alert("Please insert your name first! 🙏");
+            const contactInput = document.getElementById('contact');
+            if (!nameInput.value.trim() || !contactInput.value.trim()) {
+                if (!nameInput.value.trim()) nameInput.style.borderColor = 'var(--accent)';
+                if (!contactInput.value.trim()) contactInput.style.borderColor = 'var(--accent)';
+                alert("Please fill in your name and contact number! 🙏");
                 return;
             }
 
