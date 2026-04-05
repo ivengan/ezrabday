@@ -37,7 +37,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around; /* Spread Title, Card, and Spacing */
+            justify-content: center; /* Center the whole group */
+            gap: 1rem; /* New specific gap between Header and Card */
             overflow: hidden;
             padding: 1.5rem;
             position: relative;
@@ -62,16 +63,16 @@
 
         .hero h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 3rem; /* Slightly larger */
+            font-weight: 900; /* Maximum bold */
             background: linear-gradient(135deg, #ffffff, #a5b4fc, #f472b6, #c084fc);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
             margin-bottom: 0;
-            line-height: 1.1;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            line-height: 1.0; /* Tigher line height for rows */
+            text-shadow: 0 10px 20px rgba(0,0,0,0.4); /* Stronger shadow */
         }
 
         /* Card Section */
