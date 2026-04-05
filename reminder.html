@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Reminders - Ezra's Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #f43f5e;
+            --bg: #0f172a;
+            --surface: rgba(15, 23, 42, 0.8);
+            --text-main: #ffffff;
+            --text-dim: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            gap: 1rem;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .date-time {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc, #f472b6, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2.5rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-align: center;
+            color: #a5b4fc;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid rgba(165, 180, 252, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .section li {
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .section li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .contact-link {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .action-area {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .calendar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 900;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .calendar-btn:hover { transform: translateY(-3px); }
+
+        .or-text {
+            margin: 0.8rem 0;
+            font-weight: 900;
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .screenshot-hint {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            font-weight: 800;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+
+        .back-btn {
+            margin-top: 1rem;
+            color: #94a3b8;
+            text-decoration: underline;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        @media (max-height: 750px) {
+            .card { padding: 1.25rem; gap: 1rem; }
+            h2 { font-size: 1.4rem; }
+            .header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="date-time">APRIL 18 • 3:30 PM</div>
+        <h1>Ezra's home sweet home</h1>
+    </div>
+
+    <div class="card">
+        <h2>REMINDER</h2>
+        
+        <div class="section">
+            <h3>🔹 Please bring</h3>
+            <ul>
+                <li>Swinwear (for waterplay)</li>
+                <li>Extra set of clothes</li>
+                <li>Towel</li>
+                <li>YOUR SMILES! 😄</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>📞 Contact person</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <a href="tel:0176405645" class="contact-link">
+                    <span>📱</span> 017-6405645 (Ezra's PAPA)
+                </a>
+                <a href="tel:0108039091" class="contact-link">
+                    <span>📱</span> 010-8039091 (Ezra's MAMA)
+                </a>
+            </div>
+        </div>
+
+        <div class="action-area">
+            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ezra's+6th+Birthday+Celebration!&dates=20260418T153000/20260418T183000&details=Come+celebrate+Ezra's+6th+birthday!+Map+Location:+https://www.google.com/maps/search/?api=1%26query=2.2713214237008,102.53505347543722&location=Ezra's+home+sweet+home&sf=true&output=xml" 
+               target="_blank" class="calendar-btn">
+               📅 Add to My Calendar
+            </a>
+            <div class="or-text">OR</div>
+            <div class="screenshot-hint">
+                📸 Don't forget! Take a screenshot to save the date!
+            </div>
+        </div>
+    </div>
+
+    <a href="ezrabday.html" class="back-btn">Back to Invitation</a>
+
+</body>
+</html>

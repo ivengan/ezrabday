@@ -363,7 +363,7 @@
             <div class="info-item">
                 <h3>When</h3>
                 <p>April 18, 2026</p>
-                <p>2:00 PM</p>
+                <p>3:30 PM</p>
             </div>
             <div class="info-item">
                 <h3>Where</h3>
@@ -401,12 +401,9 @@
                 <p style="text-align: center; color: #cbd5e1; font-size: 0.75rem; font-weight: 800;">
                     Please RSVP by April 9
                 </p>
-
-                <!-- Add to Calendar at the bottom of the card -->
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ezra's+6th+Birthday+Celebration!&dates=20260418T140000/20260418T170000&details=Come+celebrate+Ezra's+6th+birthday!+Location:+Ezra's+home+sweet+home&location=Ezra's+home+sweet+home&sf=true&output=xml" 
-                   target="_blank" class="calendar-btn">
-                   📅 Add to My Calendar
-                </a>
+                <div id="reminder-link-container" style="display: none; text-align: center; margin-top: 1rem;">
+                    <a href="reminder.html" class="calendar-btn" style="background: rgba(99, 102, 241, 0.2); border-color: var(--primary);">🎁 VIEW PARTY REMINDERS</a>
+                </div>
             </form>
         </div>
 
@@ -481,6 +478,7 @@
             if (attendance === 'Yes') {
                 confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
                 btn.innerText = 'GREAT! SEE YOU ON APRIL 18! 🎈';
+                document.getElementById('reminder-link-container').style.display = 'block';
             } else {
                 btn.innerText = 'SENDING...';
             }
