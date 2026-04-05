@@ -466,6 +466,7 @@
                 body: JSON.stringify({
                     name: nameInput.value,
                     parents: document.getElementById('parents').value,
+                    contact: document.getElementById('contact').value,
                     attendance: response
                 })
             }).catch(err => console.log('Sheet Error:', err));
