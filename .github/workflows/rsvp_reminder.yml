@@ -1,0 +1,30 @@
+name: RSVP Reminder
+
+on:
+  schedule:
+    # Run at 00:00 UTC on April 13th
+    - cron: '0 0 13 4 *'
+  workflow_dispatch: # Allow manual trigger for testing
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Year and Send Reminder
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const now = new Date();
+            // Only run in 2026
+            if (now.getFullYear() !== 2026) {
+              console.log("Not 2026, skipping.");
+              return;
+            }
+            
+            // Create a GitHub Issue as a notification reminder
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "🎉 BIRTHDAY REMINDER: Check Ezra's RSVP List!",
+              body: `Hi Ezra's family!\n\nToday is April 13th, 2026. The RSVP deadline has passed.\n\nPlease log in to your [Formspree Dashboard](https://formspree.io/forms) to view the final list of guests for the birthday party on the 18th!\n\nEmail target: ivengan123@gmail.com`
+            });

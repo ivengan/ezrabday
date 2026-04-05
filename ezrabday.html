@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezra's Birthday Invitation 2026</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #f43f5e;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 2rem 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        /* Card Section */
+        .card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .info-item h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* RSVP Form */
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input[type="text"], textarea {
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1rem;
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .radio-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .radio-option input:checked + .radio-label {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .radio-option.no input:checked + .radio-label {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 1.25rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Deadline Banner */
+        #deadline-banner {
+            display: none;
+            background: rgba(244, 63, 94, 0.2);
+            border: 2px dashed var(--accent);
+            padding: 2rem;
+            border-radius: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        #deadline-banner h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.5rem; }
+            .card { padding: 2rem; }
+            .info-grid { grid-template-columns: 1fr; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>EZRA'S 2026 BIRTHDAY</h1>
+        <p>A Galactic Celebration Awaits!</p>
+    </div>
+
+    <div class="card" id="invitation-card">
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>When</h3>
+                <p>April 18, 2026</p>
+                <p>2:00 PM</p>
+            </div>
+            <div class="info-item">
+                <h3>Where</h3>
+                <p>The Party Zone</p>
+                <p>123 Birthday Ave</p>
+            </div>
+        </div>
+
+        <div id="rsvp-container">
+            <h2>Will you join us?</h2>
+            <form action="https://formspree.io/f/ivengan123@gmail.com" method="POST" class="rsvp-form" id="rsvp-form">
+                <div class="input-group">
+                    <label for="name">Guest Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="attendance" value="Yes" checked>
+                        <span class="radio-label">YES! I'M IN! 🚀</span>
+                    </label>
+                    <label class="radio-option no">
+                        <input type="radio" name="attendance" value="No">
+                        <span class="radio-label">SORRY, CAN'T 😢</span>
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Message for Ezra (Optional)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Write a birthday wish..."></textarea>
+                </div>
+
+                <!-- Deadline Information -->
+                <p style="text-align: center; color: var(--text-dim); font-size: 0.9rem; margin-top: 1rem;">
+                    Please RSVP by April 12, 2026
+                </p>
+
+                <button type="submit" class="submit-btn" id="submit-btn">SEND RSVP</button>
+            </form>
+        </div>
+
+        <div id="deadline-banner">
+            <h3>RSVP CLOSED</h3>
+            <p>The deadline to RSVP (April 12, 2026) has passed. We hope to see you at the next one!</p>
+        </div>
+    </div>
+
+    <script>
+        // Deadline checking logic
+        const deadlineDate = new Date('2026-04-13T00:00:00'); // Deadline ends at end of April 12
+        const now = new Date();
+
+        if (now > deadlineDate) {
+            document.getElementById('rsvp-container').style.display = 'none';
+            document.getElementById('deadline-banner').style.display = 'block';
+        }
+
+        // Celebrate on submit
+        const form = document.getElementById('rsvp-form');
+        form.addEventListener('submit', function(e) {
+            const attendance = document.querySelector('input[name="attendance"]:checked').value;
+            
+            if (attendance === 'Yes') {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#6366f1', '#a855f7', '#f43f5e']
+                });
+            }
+            
+            // Note: Formspree will handle the actual redirect/submission
+            // This is just for immediate visual feedback
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = 'SENDING...';
+            btn.disabled = true;
+        });
+    </script>
+</body>
+</html>
