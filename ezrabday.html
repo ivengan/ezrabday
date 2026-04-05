@@ -7,7 +7,7 @@
     <!-- Modern Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&display=swap" rel="stylesheet">
     <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -16,7 +16,7 @@
             --secondary: #a855f7;
             --accent: #f43f5e;
             --bg: #0f172a;
-            --surface: rgba(15, 23, 42, 0.85); /* Darker surface for better contrast */
+            --surface: rgba(15, 23, 42, 0.7); /* More transparent to see the cake */
             --text-main: #ffffff;
             --text-dim: #cbd5e1;
             --cake-base: #fef3c7;
@@ -37,180 +37,181 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-around; /* Spread Title, Card, and Spacing */
             overflow: hidden;
-            padding: 1rem;
+            padding: 1.5rem;
             position: relative;
         }
 
-        /* Cake Background */
-        .cake-container {
+        /* Hero Section */
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            letter-spacing: -0.05em;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Card Section */
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 3rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Better spacing between form elements */
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Cake Background (Inside Card) */
+        .cake-bg {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 0;
+            z-index: -1;
+            opacity: 0.8;
             pointer-events: none;
-            opacity: 0.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .cake {
-            position: relative;
-            width: 250px;
-            height: 150px;
+            width: 200px;
+            height: 100px;
             background: var(--cake-base);
-            border-radius: 20px 20px 10px 10px;
-            box-shadow: 0 10px 0 #fde68a, inset 0 -10px 0 rgba(0,0,0,0.1);
+            border-radius: 15px 15px 5px 5px;
+            box-shadow: 0 8px 0 #fde68a, inset 0 -6px 0 rgba(0,0,0,0.05);
+            position: relative;
         }
 
         .frosting {
             position: absolute;
-            top: -10px;
-            left: -5px;
-            width: 260px;
-            height: 40px;
+            top: -8px;
+            left: -4px;
+            width: 208px;
+            height: 30px;
             background: var(--cake-frosting);
-            border-radius: 20px;
-            box-shadow: 0 5px 0 #fbcfe8;
+            border-radius: 15px;
+            box-shadow: 0 4px 0 #fbcfe8;
         }
 
         /* Candles */
         .candles {
             position: absolute;
-            top: -40px;
+            top: -30px;
             width: 100%;
             display: flex;
             justify-content: space-around;
-            padding: 0 30px;
+            padding: 0 25px;
         }
 
         .candle {
-            width: 12px;
-            height: 45px;
-            border-radius: 4px;
+            width: 10px;
+            height: 35px;
+            border-radius: 3px;
             position: relative;
         }
 
         .flame {
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 10px;
-            height: 18px;
+            width: 8px;
+            height: 15px;
             background: #ffa500;
             border-radius: 50% 50% 20% 20%;
-            box-shadow: 0 0 15px #ff4500, 0 0 5px #ffd700;
-            animation: flicker 0.1s infinite alternate;
+            box-shadow: 0 0 12px #ff4500, 0 0 4px #ffd700;
+            animation: flicker 0.12s infinite alternate;
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.9; }
-            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); opacity: 1; }
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
         }
 
-        /* Multi-colored candles */
-        .c1 { background: #ff595e; }
-        .c2 { background: #ffca3a; }
-        .c3 { background: #8ac926; }
-        .c4 { background: #1982c4; }
-        .c5 { background: #6a4c93; }
-        .c6 { background: #f15bb5; }
+        .c1 { background: #ff595e; } .c2 { background: #ffca3a; } .c3 { background: #8ac926; }
+        .c4 { background: #1982c4; } .c5 { background: #6a4c93; } .c6 { background: #f15bb5; }
 
-        /* Card Section */
-        .card {
-            background: var(--surface);
-            backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 2.5rem;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
-            z-index: 1;
-            position: relative;
-            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #a5b4fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
-            text-align: center;
-        }
-
+        /* Form Content Overlay Styling */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.25rem;
             border-radius: 1.5rem;
+            backdrop-filter: blur(5px);
         }
 
         .info-item h3 {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            color: #818cf8;
+            color: #a5b4fc;
             font-weight: 800;
             margin-bottom: 0.25rem;
         }
 
         .info-item p {
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .location-link {
-            color: #a5b4fc;
+            color: #ffffff;
             text-decoration: underline;
             cursor: pointer;
-            font-weight: 800;
+            font-weight: 900;
+            background: rgba(99, 102, 241, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
-        /* RSVP Form */
         h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
             text-align: center;
             color: #ffffff;
-            font-weight: 800;
-        }
-
-        .input-group label {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            font-weight: 600;
+            font-weight: 900;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         input[type="text"], input[type="number"] {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.75rem;
-            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1rem;
+            padding: 0.8rem;
             color: white;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
+            width: 100%;
         }
 
         .radio-label {
             display: block;
-            padding: 0.75rem;
+            padding: 0.8rem;
             text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.75rem;
-            font-weight: 800;
-            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1rem;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: white;
         }
 
         .submit-btn {
@@ -218,11 +219,21 @@
             color: white;
             border: none;
             border-radius: 9999px;
-            padding: 1rem;
-            font-size: 1.2rem;
+            padding: 1.1rem 3rem;
+            font-size: 1.3rem;
             font-weight: 900;
             cursor: pointer;
+            align-self: center; /* Center the button */
+            width: auto;
+            min-width: 180px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4), 0 0 15px rgba(99, 102, 241, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.6), 0 0 25px rgba(99, 102, 241, 0.5);
         }
 
         /* Map Modal */
@@ -238,39 +249,44 @@
 
         .modal {
             background: #1e293b;
-            padding: 2rem;
-            border-radius: 2rem;
+            padding: 2.5rem;
+            border-radius: 2.5rem;
             text-align: center;
             width: 90%;
-            max-width: 320px;
+            max-width: 340px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        @media (max-height: 750px) {
+            .card { gap: 1rem; padding: 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .cake { width: 180px; height: 90px; }
+            .candles { top: -25px; }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Animated Cake Background -->
-    <div class="cake-container">
-        <div class="candles">
-            <div class="candle c1"><div class="flame"></div></div>
-            <div class="candle c2"><div class="flame"></div></div>
-            <div class="candle c3"><div class="flame"></div></div>
-            <div class="candle c4"><div class="flame"></div></div>
-            <div class="candle c5"><div class="flame"></div></div>
-            <div class="candle c6"><div class="flame"></div></div>
-        </div>
-        <div class="cake">
-            <div class="frosting"></div>
-        </div>
-    </div>
 
     <div class="hero">
         <h1>EZRA'S BIRTHDAY</h1>
     </div>
 
     <div class="card" id="invitation-card">
+        <!-- Background Cake Overlay -->
+        <div class="cake-bg">
+            <div class="candles">
+                <div class="candle c1"><div class="flame"></div></div>
+                <div class="candle c2"><div class="flame"></div></div>
+                <div class="candle c3"><div class="flame"></div></div>
+                <div class="candle c4"><div class="flame"></div></div>
+                <div class="candle c5"><div class="flame"></div></div>
+                <div class="candle c6"><div class="flame"></div></div>
+            </div>
+            <div class="cake"><div class="frosting"></div></div>
+        </div>
+
         <div class="info-grid">
             <div class="info-item">
                 <h3>When</h3>
@@ -280,20 +296,20 @@
             <div class="info-item">
                 <h3>Where</h3>
                 <p class="location-link" onclick="openMapPicker()">Ezra's home sweet home</p>
-                <p style="font-size: 0.7rem; color: #94a3b8; font-weight: 600;">(Tap to navigate)</p>
+                <p style="font-size: 0.65rem; color: #cbd5e1; font-weight: 700; margin-top: 4px;">(Tap to navigate)</p>
             </div>
         </div>
 
-        <div id="rsvp-container">
+        <div id="rsvp-container" style="display: flex; flex-direction: column; gap: 1rem;">
             <h2>Will you join us?</h2>
-            <form action="https://formspree.io/f/ivengan123@gmail.com" method="POST" class="rsvp-form" id="rsvp-form">
-                <div style="display: grid; grid-template-columns: 2.5fr 1fr; gap: 0.75rem;">
-                    <div class="input-group" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                        <label for="name">Guest Name</label>
+            <form action="https://formspree.io/f/ivengan123@gmail.com" method="POST" class="rsvp-form" id="rsvp-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 0.75rem;">
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <label for="name" style="font-size: 0.75rem; font-weight: 800; color: #a5b4fc;">Guest Name</label>
                         <input type="text" id="name" name="name" placeholder="Name" required>
                     </div>
-                    <div class="input-group" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                        <label for="parents">Parent(s)</label>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <label for="parents" style="font-size: 0.75rem; font-weight: 800; color: #a5b4fc;">Parents</label>
                         <input type="number" id="parents" name="parents" value="1" min="0" max="2" required>
                     </div>
                 </div>
@@ -305,65 +321,84 @@
                     </label>
                     <label class="radio-option" style="cursor: pointer;">
                         <input type="radio" name="attendance" value="No" style="display: none;">
-                        <span class="radio-label" style="background: rgba(244, 63, 94, 0.2); border-color: rgba(244, 63, 94, 0.4);">NO 😢</span>
+                        <span class="radio-label" style="background: rgba(244, 63, 94, 0.3); border-color: rgba(244, 63, 94, 0.5);">NO 😢</span>
                     </label>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submit-btn">SEND!</button>
-                <p style="text-align: center; color: #94a3b8; font-size: 0.75rem; font-weight: 700; margin-top: 0.5rem;">
+                <p style="text-align: center; color: #cbd5e1; font-size: 0.75rem; font-weight: 800;">
                     Please RSVP by April 12
                 </p>
             </form>
         </div>
 
-        <div id="deadline-banner" style="display: none; text-align: center; padding: 1rem;">
-            <h3 style="color: var(--accent); font-size: 1.2rem;">RSVP CLOSED</h3>
-            <p>See you next time!</p>
+        <div id="deadline-banner" style="display: none; text-align: center; padding: 1.5rem;">
+            <h3 style="color: var(--accent); font-size: 1.5rem; font-weight: 900;">RSVP CLOSED</h3>
+            <p>See you at the next one!</p>
         </div>
     </div>
 
-    <!-- Map Modal -->
+    <!-- Map Picker Modal -->
     <div class="modal-overlay" id="mapModal">
         <div class="modal">
-            <h3 style="margin-bottom: 1.5rem;">Navigate with...</h3>
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <a href="https://www.google.com/maps/search/?api=1&query=2.2713214237008,102.53505347543722" target="_blank" style="background: #4285F4; padding: 1rem; border-radius: 1rem; color: white; text-decoration: none; font-weight: bold;">Google Maps</a>
-                <a href="https://waze.com/ul?ll=2.2713214237008,102.53505347543722&navigate=yes" target="_blank" style="background: #33CCFF; padding: 1rem; border-radius: 1rem; color: white; text-decoration: none; font-weight: bold;">Waze</a>
-                <button onclick="closeMapPicker()" style="background: transparent; border: 1px solid #94a3b8; color: #94a3b8; padding: 0.75rem; border-radius: 1rem; cursor: pointer;">Cancel</button>
+            <h3 style="margin-bottom: 2rem; color: white; font-weight: 900;">Navigate with...</h3>
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <a href="https://www.google.com/maps/search/?api=1&query=2.2713214237008,102.53505347543722" target="_blank" style="background: #4285F4; padding: 1.1rem; border-radius: 1.25rem; color: white; text-decoration: none; font-weight: 900; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);">Google Maps</a>
+                <a href="https://waze.com/ul?ll=2.2713214237008,102.53505347543722&navigate=yes" target="_blank" style="background: #33CCFF; padding: 1.1rem; border-radius: 1.25rem; color: white; text-decoration: none; font-weight: 900; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(51, 204, 255, 0.3);">Waze</a>
+                <button onclick="closeMapPicker()" style="background: transparent; border: 2px solid #cbd5e1; color: #cbd5e1; padding: 0.8rem; border-radius: 1.25rem; cursor: pointer; font-weight: 800; margin-top: 0.5rem;">Cancel</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Trigger Confetti on Load
-        window.addEventListener('DOMContentLoaded', () => {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93']
-            });
-        });
+        // Premium 12-Second Confetti Sequence
+        function startCelebration() {
+            const end = Date.now() + (12 * 1000); // 12 seconds
+            const colors = ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93', '#f15bb5'];
 
-        // Deadline check
-        const deadlineDate = new Date('2026-04-13T00:00:00');
-        if (new Date() > deadlineDate) {
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        window.addEventListener('DOMContentLoaded', startCelebration);
+
+        // Deadline logic
+        if (new Date() > new Date('2026-04-13T00:00:00')) {
             document.getElementById('rsvp-container').style.display = 'none';
             document.getElementById('deadline-banner').style.display = 'block';
         }
 
-        // Map picker
+        // Map picker controls
         function openMapPicker() { document.getElementById('mapModal').style.display = 'flex'; }
         function closeMapPicker() { document.getElementById('mapModal').style.display = 'none'; }
 
-        // RSVP celebration
+        // RSVP Form
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
             if (attendance === 'Yes') {
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
             }
-            document.getElementById('submit-btn').innerText = 'SENDING...';
-            document.getElementById('submit-btn').disabled = true;
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = 'SENDING...';
+            btn.disabled = true;
         });
     </script>
 </body>
