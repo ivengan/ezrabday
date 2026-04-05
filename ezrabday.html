@@ -98,9 +98,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(1.5); /* 1.5x larger */
             z-index: -1;
-            opacity: 0.4; /* 20% more transparent (from 0.6) */
+            opacity: 0.4;
             pointer-events: none;
             display: flex;
             flex-direction: column;
@@ -108,8 +108,8 @@
         }
 
         .cake {
-            width: 312px; /* 20% bigger (from 260px) */
-            height: 156px; /* Scaling height proportionally */
+            width: 312px;
+            height: 156px;
             background: var(--cake-base);
             border-radius: 15px 15px 5px 5px;
             box-shadow: 0 8px 0 #fde68a, inset 0 -6px 0 rgba(0,0,0,0.05);
@@ -119,9 +119,9 @@
         .frosting {
             position: absolute;
             top: -12px;
-            left: -6px;
-            width: 324px; /* 20% bigger (from 270px) */
-            height: 47px; /* Scaling height proportionally */
+            left: -3%;
+            width: 106%;
+            height: 47px;
             background: var(--cake-frosting);
             border-radius: 20px;
             box-shadow: 0 6px 0 #fbcfe8;
