@@ -55,6 +55,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            cursor: pointer; /* Indicating it's clickable */
         }
 
         .card {
@@ -217,7 +218,7 @@
 
     <div class="header">
         <div class="date-time">APRIL 18 • 3:30 PM</div>
-        <h1>Ezra's home sweet home</h1>
+        <h1 onclick="openMapPicker()">Ezra's home sweet home</h1>
         <div class="location-link" onclick="openMapPicker()">(Tap to navigate)</div>
     </div>
 
