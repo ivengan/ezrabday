@@ -25,6 +25,6 @@ jobs:
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: "🎉 BIRTHDAY REMINDER: Check Ezra's RSVP List!",
-              body: `Hi Ezra's family!\n\nToday is April 10th, 2026. The RSVP deadline has passed.\n\nPlease check your email archive (ivengan123@gmail.com) or the [Formspree Dashboard](https://formspree.io/forms) to view the final list of guests for the birthday party on the 18th!`
+              title: "🎉 BIRTHDAY REMINDER: Check Ezra's Birthday Details!",
+              body: `Hi Ezra's family!\n\nToday is April 10th, 2026. The RSVP deadline has passed.\n\nPlease check your Guest List to see who's coming for the birthday party on the 18th!`
             });
