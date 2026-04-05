@@ -446,7 +446,12 @@
 
             if (response === 'No') {
                 alert("Oops, we hope to see you on next event!");
-                // No form.submit() here as backend is removed
+                // Attempt to close the window (Works if opened from a link)
+                window.close();
+                // Fallback for some browsers: redirect to a blank page if close() is blocked
+                setTimeout(() => {
+                    window.location.href = "about:blank";
+                }, 500);
                 return;
             }
             
