@@ -2,8 +2,8 @@ name: RSVP Reminder
 
 on:
   schedule:
-    # Run at 00:00 UTC on April 13th
-    - cron: '0 0 13 4 *'
+    # Run at 00:00 UTC on April 10th
+    - cron: '0 0 10 4 *'
   workflow_dispatch: # Allow manual trigger for testing
 
 jobs:
@@ -26,5 +26,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "🎉 BIRTHDAY REMINDER: Check Ezra's RSVP List!",
-              body: `Hi Ezra's family!\n\nToday is April 13th, 2026. The RSVP deadline has passed.\n\nPlease log in to your [Formspree Dashboard](https://formspree.io/forms) to view the final list of guests for the birthday party on the 18th!\n\nEmail target: ivengan123@gmail.com`
+              body: `Hi Ezra's family!\n\nToday is April 10th, 2026. The RSVP deadline has passed.\n\nPlease check your email archive (ivengan123@gmail.com) or the [Formspree Dashboard](https://formspree.io/forms) to view the final list of guests for the birthday party on the 18th!`
             });
