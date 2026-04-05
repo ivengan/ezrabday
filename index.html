@@ -15,9 +15,13 @@
             --text: #f8fafc;
         }
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg);
             color: var(--text);
@@ -25,53 +29,58 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            height: 100dvh; /* Dynamic Viewport Height for mobile */
+            overflow: hidden; /* Prevent scrolling */
             text-align: center;
+            padding: 1rem;
         }
 
         .container {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(10px);
-            padding: 3rem;
+            padding: 2rem;
             border-radius: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            max-width: 400px;
-            width: 90%;
+            max-width: 380px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin: 0;
         }
 
         .qr-wrapper {
             background: white;
-            padding: 1rem;
-            border-radius: 1.5rem;
+            padding: 0.75rem;
+            border-radius: 1.25rem;
             display: inline-block;
-            margin-bottom: 2rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .qr-wrapper img {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             display: block;
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #94a3b8;
-            line-height: 1.6;
+            line-height: 1.4;
+            margin: 0;
         }
 
         .btn {
             display: inline-block;
-            margin-top: 1.5rem;
             padding: 0.8rem 2rem;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
@@ -79,22 +88,30 @@
             border-radius: 9999px;
             font-weight: bold;
             transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.9rem;
         }
 
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
         }
+
+        @media (max-height: 600px) {
+            .container { padding: 1.5rem; gap: 1rem; }
+            h1 { font-size: 1.5rem; }
+            .qr-wrapper img { width: 150px; height: 150px; }
+            p { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Ezra's Birthday 2026</h1>
+        <h1>Ezra's Birthday</h1>
         <div class="qr-wrapper">
             <img src="invite_qr.png" alt="Scan to RSVP">
         </div>
-        <p>Scan this QR code to view the invitation and RSVP for Ezra's special day!</p>
-        <a href="ezrabday.html" class="btn">View Invitation Directly</a>
+        <p>Scan to view the invitation<br>and RSVP for Ezra's special day!</p>
+        <a href="ezrabday.html" class="btn">View Invitation</a>
     </div>
 </body>
 </html>
