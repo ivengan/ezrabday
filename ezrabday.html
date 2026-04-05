@@ -269,6 +269,42 @@
             box-shadow: 0 15px 30px rgba(99, 102, 241, 0.6), 0 0 25px rgba(99, 102, 241, 0.5);
         }
 
+        .calendar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #a5b4fc;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid rgba(165, 180, 252, 0.3);
+            border-radius: 999px;
+            transition: all 0.3s;
+        }
+
+        .calendar-btn:hover {
+            background: rgba(165, 180, 252, 0.1);
+            border-color: #a5b4fc;
+        }
+
+        .screenshot-hint {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 700;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+
         /* Map Modal */
         .modal-overlay {
             position: fixed;
@@ -365,6 +401,12 @@
                 <p style="text-align: center; color: #cbd5e1; font-size: 0.75rem; font-weight: 800;">
                     Please RSVP by April 9
                 </p>
+
+                <!-- Add to Calendar at the bottom of the card -->
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ezra's+6th+Birthday+Celebration!&dates=20260418T140000/20260418T170000&details=Come+celebrate+Ezra's+6th+birthday!+Location:+Ezra's+home+sweet+home&location=Ezra's+home+sweet+home&sf=true&output=xml" 
+                   target="_blank" class="calendar-btn">
+                   📅 Add to My Calendar
+                </a>
             </form>
         </div>
 
@@ -372,6 +414,11 @@
             <h3 style="color: var(--accent); font-size: 1.5rem; font-weight: 900;">RSVP CLOSED</h3>
             <p>See you at the next one!</p>
         </div>
+    </div>
+
+    <!-- Screenshot Prompt -->
+    <div class="screenshot-hint">
+        📸 Don't forget! Take a screenshot to save the date!
     </div>
 
     <!-- Map Picker Modal -->
@@ -429,11 +476,14 @@
         // RSVP Form
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             const attendance = document.querySelector('input[name="attendance"]:checked').value;
+            const btn = document.getElementById('submit-btn');
+            
             if (attendance === 'Yes') {
                 confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#6366f1', '#a855f7', '#f43f5e'] });
+                btn.innerText = 'GREAT! SEE YOU ON APRIL 18! 🎈';
+            } else {
+                btn.innerText = 'SENDING...';
             }
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = 'SENDING...';
             btn.disabled = true;
         });
     </script>
