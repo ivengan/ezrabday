@@ -9,6 +9,8 @@ on:
 jobs:
   reminder:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Check Year and Send Reminder
         uses: actions/github-script@v6
