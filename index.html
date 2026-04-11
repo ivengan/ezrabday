@@ -112,5 +112,11 @@
         </div>
         <p>Scan to view the invitation<br>and RSVP for Ezra's special day!</p>
     </div>
+    <script>
+        // Deadline logic: Redirect to reminders if passed
+        if (new Date() > new Date('2026-04-10T00:00:00')) {
+            window.location.href = 'reminder.html';
+        }
+    </script>
 </body>
 </html>

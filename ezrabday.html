@@ -435,10 +435,9 @@
 
         window.addEventListener('DOMContentLoaded', startCelebration);
 
-        // Deadline logic
+        // Deadline logic: Redirect to reminders if passed
         if (new Date() > new Date('2026-04-10T00:00:00')) {
-            document.getElementById('rsvp-container').style.display = 'none';
-            document.getElementById('deadline-banner').style.display = 'block';
+            window.location.href = 'reminder.html';
         }
 
 
