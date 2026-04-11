@@ -13,7 +13,7 @@ jobs:
       issues: write
     steps:
       - name: Check Year and Send Reminder
-        uses: actions/github-script@v6
+        uses: actions/github-script@v9
         with:
           script: |
             const now = new Date();
